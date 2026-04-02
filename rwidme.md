@@ -1,6 +1,6 @@
 # ft_linear_regression
 
-> A complete, step-by-step guide to the mandatory part — with math, diagrams, and every confusion answered.
+> A complete, step-by-step guide to the mandatory part — with math, diagrams, and every confusion answered inline.
 
 ---
 
@@ -22,31 +22,27 @@
 
 We assume that the price of a car depends **linearly** on its mileage. That means our model is a straight line:
 
-```
-hθ(x) = θ₀ + θ₁ · x
-```
+$$h_\theta(x) = \theta_0 + \theta_1 \cdot x$$
 
 | Symbol | Meaning |
 |--------|---------|
-| `x` | mileage (input feature) |
-| `hθ(x)` | predicted price (output) |
-| `θ₀` (theta-zero) | intercept — predicted price when mileage = 0 |
-| `θ₁` (theta-one) | slope — how much price changes per km |
+| $x$ | mileage (input feature) |
+| $h_\theta(x)$ | predicted price (output) |
+| $\theta_0$ | intercept — predicted price when mileage = 0 |
+| $\theta_1$ | slope — how much price changes per km |
 
 The project specifies that you start with **θ₀ = 0** and **θ₁ = 0**. That means your first prediction for every car is price = 0. That's completely wrong — but it doesn't matter. The algorithm will fix it.
 
+```mermaid
+xychart-beta
+    title "Price vs Mileage — Before and After Training"
+    x-axis "Mileage (km)" [0, 50000, 100000, 150000, 200000, 250000]
+    y-axis "Price (euros)" 0 --> 20000
+    line [0, 0, 0, 0, 0, 0]
+    line [18000, 15500, 13000, 10500, 8000, 5500]
 ```
-price
-  ^
-  |                              ● after training (green line)
-  |                         ●
-  |                    ●
-  |               ●
-  |          ●
-  |     ●
-  |__________________________________> mileage
-  θ₀=0, θ₁=0 → flat line at 0 (starting guess)
-```
+
+> **Flat line** = starting guess (θ₀=0, θ₁=0). **Sloped line** = after training. Gradient descent moves us from one to the other.
 
 ---
 
@@ -54,66 +50,89 @@ price
 
 We need a single number that measures **how wrong our current line is**. We use the Mean Squared Error, divided by 2 for convenience:
 
-```
-J(θ₀, θ₁) = (1 / 2m) · Σᵢ (hθ(xⁱ) − yⁱ)²
-```
+$$J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2$$
 
 | Symbol | Meaning |
 |--------|---------|
-| `m` | number of cars in the dataset |
-| `xⁱ` | mileage of car i |
-| `yⁱ` | actual price of car i |
-| `hθ(xⁱ) − yⁱ` | error: predicted price minus actual price |
+| $m$ | number of cars in the dataset |
+| $x^{(i)}$, $y^{(i)}$ | mileage and actual price of car $i$ |
+| $h_\theta(x^{(i)}) - y^{(i)}$ | error: predicted minus actual price |
 
 ### Why each design choice?
 
 | Choice | Why |
 |--------|-----|
-| We **square** the error | Prevents positive and negative errors from cancelling. Also punishes large errors more than small ones. |
-| We **divide by m** | Gets the average error so J doesn't grow just because the dataset is larger. |
-| We **divide by 2** | Pure convenience: the 2 cancels when we take the derivative, making the formula cleaner. It doesn't change *where* the minimum is. |
+| **Square** the error | Prevents positive and negative errors from cancelling. Punishes large errors more than small ones. |
+| **Divide by m** | Gets the average — so J doesn't grow just because the dataset is larger. |
+| **Divide by 2** | Pure convenience: the 2 cancels when we take the derivative, making the formula cleaner. It doesn't change *where* the minimum is. |
+
+### How J looks as a surface
+
+```mermaid
+graph TD
+    Surface["J is a bowl-shaped surface above the θ₀–θ₁ plane\n\nImagine holding a salad bowl upside down and looking at it from above.\nEvery point on the rim = bad parameters. The bottom = best parameters."]
+
+    Surface --> High1["🔴 High J\nBad θ₀, θ₁\n(line far from data)"]
+    Surface --> High2["🔴 High J\nBad θ₀, θ₁\n(line far from data)"]
+    Surface --> Low["🟢 Minimum J\nBest θ₀, θ₁\n(line fits the data well)"]
+
+    High1:::high
+    High2:::high
+    Low:::low
+
+    classDef high fill:#fee2e2,stroke:#ef4444,color:#7f1d1d
+    classDef low  fill:#dcfce7,stroke:#22c55e,color:#14532d
+```
 
 ### ❓ Confusion: "How can we compute J if we don't have the real hθ?"
 
-**hθ(x) is always computable.** It's not the "true" model — it's just our current guess: `θ₀ + θ₁ · x`. At any point in training, we know θ₀ and θ₁ (we initialized them to 0), and we know every `xⁱ` from the dataset. So we can always compute `hθ(xⁱ)` and therefore J.
-
-The dataset (all `xⁱ` and `yⁱ`) is fixed. The only things that change are θ₀ and θ₁. J is just a function of those two parameters.
+> **hθ(x) is always computable.** It's not the "true" model — it's just our current guess: `θ₀ + θ₁ · x`. At any point in training, we know θ₀ and θ₁ (we initialized them to 0), and we know every `xⁱ` from the dataset. So we can always compute `hθ(xⁱ)` and therefore J.
+>
+> The dataset (all `xⁱ` and `yⁱ`) is **fixed**. The only things that change are θ₀ and θ₁.
 
 ### ❓ Confusion: "Why write J(θ₀, θ₁) instead of just J?"
 
-Because J depends **only** on θ₀ and θ₁. The data is fixed — we don't change it. Writing `J(θ₀, θ₁)` makes it explicit: the only knobs we control are the two parameters. Our goal is to find the (θ₀, θ₁) pair that makes J as small as possible.
+> Because J depends **only** on θ₀ and θ₁. The data never changes. Writing `J(θ₀, θ₁)` makes it explicit: the only knobs we control are the two parameters. Our goal is to find the (θ₀, θ₁) pair that makes J as small as possible.
 
 ---
 
 ## 3. Why We Need Derivatives
 
-Think of `J(θ₀, θ₁)` as a landscape — a surface above a 2D plane of (θ₀, θ₁) values. The height of the surface at any point is the cost. We want to find the lowest valley.
+Think of `J(θ₀, θ₁)` as a landscape — a bowl-shaped surface. To navigate downhill, we need to know the **slope of the surface** in each direction. That's what derivatives give us.
 
+```mermaid
+flowchart LR
+    subgraph LEFT["Left of minimum"]
+        L1["📍 We are here"]
+        L2["Slope is negative\nf′(t) < 0\nfunction goes DOWN to the right"]
+        L3["→ Move RIGHT to go downhill"]
+        L1 --> L2 --> L3
+    end
+
+    subgraph MID["At minimum"]
+        M1["🎯 Best point"]
+        M2["Slope = 0\nf′(t) = 0\ncompletely flat"]
+        M3["→ Don't move — we're done"]
+        M1 --> M2 --> M3
+    end
+
+    subgraph RIGHT["Right of minimum"]
+        R1["📍 We are here"]
+        R2["Slope is positive\nf′(t) > 0\nfunction goes UP to the right"]
+        R3["→ Move LEFT to go downhill"]
+        R1 --> R2 --> R3
+    end
+
+    LEFT --> MID
+    RIGHT --> MID
 ```
-J
-^
-|      *         *
-|        *     *
-|          * *
-|           *   ← minimum (what we want)
-|
-+-----------------> θ₁ (same shape for θ₀)
-```
 
-To navigate downhill, we need to know the **slope of the surface** in each direction. That's what derivatives give us:
+For **two variables** (θ₀ and θ₁), we need **partial derivatives** — one slope per direction:
 
-```
-slope < 0                     slope > 0
-(going down to the right)     (going up to the right)
-→ move RIGHT (increase t)     → move LEFT (decrease t)
-```
-
-For a function of **two variables** (θ₀ and θ₁), we need **partial derivatives** — one for each direction:
-
-| Partial derivative | Meaning |
-|--------------------|---------|
-| `∂J/∂θ₀` | How J changes when we nudge θ₀ (keeping θ₁ fixed) |
-| `∂J/∂θ₁` | How J changes when we nudge θ₁ (keeping θ₀ fixed) |
+| Partial derivative | What it tells us |
+|--------------------|-----------------|
+| $\dfrac{\partial J}{\partial \theta_0}$ | How J changes when we nudge θ₀ (keeping θ₁ fixed) |
+| $\dfrac{\partial J}{\partial \theta_1}$ | How J changes when we nudge θ₁ (keeping θ₀ fixed) |
 
 The downhill direction is always **opposite to the sign** of each partial derivative.
 
@@ -121,39 +140,46 @@ The downhill direction is always **opposite to the sign** of each partial deriva
 
 ## 4. Computing the Partial Derivatives
 
-Using the chain rule on J, we get:
+Applying the chain rule to J gives us:
 
-```
-∂J/∂θ₀ = (1/m) · Σᵢ (hθ(xⁱ) − yⁱ)
+$$\frac{\partial J}{\partial \theta_0} = \frac{1}{m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)$$
 
-∂J/∂θ₁ = (1/m) · Σᵢ (hθ(xⁱ) − yⁱ) · xⁱ
-```
+$$\frac{\partial J}{\partial \theta_1} = \frac{1}{m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right) \cdot x^{(i)}$$
 
 ### ❓ Confusion: "Why are the two formulas different? Why does θ₁ have an extra xⁱ?"
 
-Let's think about what each parameter controls:
+```mermaid
+flowchart TD
+    A["Change θ₀ by +1"] --> B["Every prediction shifts by exactly +1\nregardless of mileage\n\nhθ(x) = (θ₀+1) + θ₁·x"]
+    B --> C["Effect on J only depends on the\naverage error → no xⁱ factor"]
 
-- **θ₀** is the intercept. If you increase θ₀ by 1, *every* prediction increases by exactly 1, regardless of the mileage. So the effect on J depends only on the average prediction error.
+    D["Change θ₁ by +1"] --> E["Prediction for car i shifts by +xⁱ\na 200 000 km car is affected\n200 000× more than a 1 km car\n\nhθ(x) = θ₀ + (θ₁+1)·x"]
+    E --> F["Effect on J must be weighted\nby each car's mileage → multiply by xⁱ"]
 
-- **θ₁** is the slope. If you increase θ₁ by 1, the prediction changes by `1 · xⁱ` — which is **different for each car**. A car with mileage 200,000 km is affected 200,000× more than a car with mileage 1 km. So the correction for θ₁ must be *weighted by the mileage* of each car. That's where the extra `xⁱ` comes from.
+    C:::theta0
+    F:::theta1
 
-In short: **θ₀ shifts the whole line up/down uniformly. θ₁ rotates the line** — and the effect of rotation grows with distance from zero.
+    classDef theta0 fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a
+    classDef theta1 fill:#fef9c3,stroke:#eab308,color:#713f12
+```
 
-### Derivation sketch (for completeness)
+> **θ₀** shifts the whole line up/down uniformly — same effect on every car.
+>
+> **θ₁** rotates the line — and the effect of that rotation grows with mileage. That's why the correction for θ₁ must be weighted by `xⁱ`.
+
+### Derivation sketch
 
 ```
 J = (1/2m) · Σ (θ₀ + θ₁·x - y)²
 
-∂J/∂θ₀: chain rule → 2·(θ₀ + θ₁·x - y) · ∂(θ₀ + θ₁·x)/∂θ₀
-        = 2·error · 1          (∂θ₀/∂θ₀ = 1)
-        divide by 2m → (1/m)·Σ error
+∂J/∂θ₀:  chain rule → 2·error · ∂θ₀/∂θ₀  =  2·error · 1
+          divide by 2m  →  (1/m) · Σ error
 
-∂J/∂θ₁: chain rule → 2·(θ₀ + θ₁·x - y) · ∂(θ₀ + θ₁·x)/∂θ₁
-        = 2·error · x          (∂(θ₁·x)/∂θ₁ = x)
-        divide by 2m → (1/m)·Σ error · x
+∂J/∂θ₁:  chain rule → 2·error · ∂(θ₁·x)/∂θ₁  =  2·error · x
+          divide by 2m  →  (1/m) · Σ error · x
 ```
 
-> The 2 from the square cancels with the 2 in the denominator of J — that's the only reason we put it there.
+> The `2` from squaring cancels with the `2` in `2m` — that's the only reason we put it in J.
 
 ---
 
@@ -161,181 +187,208 @@ J = (1/2m) · Σ (θ₀ + θ₁·x - y)²
 
 The core update formula is:
 
+$$\theta^{\text{new}} = \theta^{\text{old}} - \alpha \cdot f'(\theta^{\text{old}})$$
+
+where $\alpha > 0$ is the **learning rate** (step size).
+
+### The three cases explained
+
+```mermaid
+flowchart TD
+    A["Evaluate f′(t)"] --> B{"What is the sign?"}
+
+    B -->|"Positive\nf′(t) > 0"| C["Function goes UP to the right\n→ downhill is LEFT\n→ we need to DECREASE t"]
+    C --> C2["t − α·(positive number)\n= t gets smaller ✓"]
+
+    B -->|"Zero\nf′(t) = 0"| D["Function is flat here\n→ we are at the minimum\n→ no move needed"]
+    D --> D2["t − α·0\n= t unchanged ✓"]
+
+    B -->|"Negative\nf′(t) < 0"| E["Function goes DOWN to the right\n→ downhill is RIGHT\n→ we need to INCREASE t"]
+    E --> E2["t − α·(negative number)\n= t gets larger ✓"]
+
+    C2:::decrease
+    D2:::neutral
+    E2:::increase
+
+    classDef decrease fill:#fee2e2,stroke:#ef4444,color:#7f1d1d
+    classDef neutral  fill:#f3f4f6,stroke:#9ca3af,color:#374151
+    classDef increase fill:#dcfce7,stroke:#22c55e,color:#14532d
 ```
-t_new = t_old − α · f′(t_old)
-```
-
-where `α > 0` is the **learning rate** (step size).
-
-### The three cases
-
-| Case | Derivative | Direction to go downhill | What the formula does |
-|------|-----------|--------------------------|----------------------|
-| Slope is **positive** | `f′(t) > 0` | Move **left** (decrease t) | `t − α·(positive)` = smaller t ✓ |
-| Slope is **negative** | `f′(t) < 0` | Move **right** (increase t) | `t − α·(negative)` = larger t ✓ |
-| Slope is **zero** | `f′(t) = 0` | Stay put (we're at the minimum) | `t − α·0` = t (no change) ✓ |
 
 ### ❓ The key insight that clears the blur
 
-The minus sign encodes the rule **"move opposite to the slope"** in one elegant operation. You don't need to check the sign of the derivative and then decide which way to go — the formula does it automatically.
-
-If you used **plus** instead: `t + α·f′(t)`, you'd always move *with* the slope — uphill. You'd never converge to a minimum.
+> The minus sign encodes **"move opposite to the slope"** in one operation. You don't need to check the sign yourself and decide which direction — the formula handles it automatically.
+>
+> If you used **plus** instead (`t + α·f′(t)`), you'd always move *with* the slope → uphill → you'd never reach the minimum.
 
 ### Concrete example with f(t) = t²
 
-`f′(t) = 2t`, minimum at `t = 0`.
+`f′(t) = 2t` — minimum at `t = 0`, `α = 0.1`
 
-**At t = −3:**
-```
-f′(−3) = −6   (negative → we are to the left of the minimum, go right)
-t_new = −3 − 0.1·(−6) = −3 + 0.6 = −2.4   ✓ moved right (closer to 0)
-```
+| Starting t | f′(t) | Direction needed | Calculation | Result |
+|-----------|-------|-----------------|-------------|--------|
+| −3 | −6 | Go right (increase t) | −3 − 0.1·(−6) | **−2.4** ✅ |
+| +3 | +6 | Go left (decrease t) | 3 − 0.1·(+6) | **+2.4** ✅ |
+| 0 | 0 | Stay (at minimum) | 0 − 0.1·0 | **0** ✅ |
 
-**At t = +3:**
-```
-f′(3) = 6    (positive → we are to the right of the minimum, go left)
-t_new = 3 − 0.1·6 = 3 − 0.6 = 2.4         ✓ moved left (closer to 0)
-```
+### Cost decreasing as we step toward the minimum
 
-**At t = 0 (minimum):**
+```mermaid
+xychart-beta
+    title "f(t) = t² — cost drops each step (starting at t = 3)"
+    x-axis "Step" [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    y-axis "f(t)" 0 --> 10
+    line [9.0, 5.76, 3.69, 2.36, 1.51, 0.97, 0.62, 0.40, 0.25, 0.16, 0.10]
 ```
-f′(0) = 0
-t_new = 0 − 0.1·0 = 0                      ✓ no change (we stay at the minimum)
-```
-
-### Memory trick
-
-> Think of the derivative as telling you **which way is up**. You want to go down, so you go the **opposite way**. The formula `θ_new = θ − α · derivative` does exactly that.
 
 ---
 
 ## 6. Gradient Descent — The Full Algorithm
 
-For our two-parameter case, the update rule is:
+For our two-parameter case:
 
+$$\text{tmp}_0 = \theta_0 - \alpha \cdot \frac{1}{m} \sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)})$$
+
+$$\text{tmp}_1 = \theta_1 - \alpha \cdot \frac{1}{m} \sum_{i=1}^{m}(h_\theta(x^{(i)}) - y^{(i)}) \cdot x^{(i)}$$
+
+$$\theta_0 := \text{tmp}_0 \qquad \theta_1 := \text{tmp}_1$$
+
+### ❓ Confusion: "Why compute tmp₀ and tmp₁ first? Why not update directly?"
+
+> Both gradients must be computed using the **same old** θ₀ and θ₁. If you update θ₀ first and then use the *new* θ₀ to compute the gradient for θ₁, you're no longer following the true downhill direction — you've drifted.
+>
+> Save both new values to temporaries, then assign both at once. This guarantees you always move from the same point in parameter space.
+
+### The iteration loop
+
+```mermaid
+flowchart TD
+    Start(["Initialize\nθ₀ = 0,  θ₁ = 0"]) --> Step1
+
+    Step1["① Compute predictions\nhᵢ = θ₀ + θ₁ · xⁱ  for all i"] --> Step2
+
+    Step2["② Compute errors\neᵢ = hᵢ − yⁱ  for all i"] --> Step3
+
+    Step3["③ Compute both gradients\ngrad₀ = (1/m) · Σ eᵢ\ngrad₁ = (1/m) · Σ eᵢ · xⁱ\n\n⚠️ Do NOT update yet"] --> Step4
+
+    Step4["④ Update simultaneously\nθ₀ := θ₀ − α · grad₀\nθ₁ := θ₁ − α · grad₁"] --> Check
+
+    Check{"Converged?"}
+    Check -->|"No — J still decreasing"| Step1
+    Check -->|"Yes — J stable"| Done
+
+    Done(["Save θ₀ and θ₁\nto file"])
+
+    Start:::init
+    Done:::done
+    Check:::check
+
+    classDef init  fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a
+    classDef done  fill:#dcfce7,stroke:#22c55e,color:#14532d
+    classDef check fill:#fef9c3,stroke:#eab308,color:#713f12
 ```
-tmp₀ = θ₀ − α · (1/m) · Σ (hθ(xⁱ) − yⁱ)
-tmp₁ = θ₁ − α · (1/m) · Σ (hθ(xⁱ) − yⁱ) · xⁱ
-
-θ₀ := tmp₀
-θ₁ := tmp₁
-```
-
-### ❓ Confusion: "Why compute tmp₀ and tmp₁ first? Why 'simultaneous update'?"
-
-Both gradients must be computed using the **same old** θ₀ and θ₁. If you update θ₀ first and then use the *new* θ₀ to compute the gradient for θ₁, you're no longer computing the true gradient of J at the original point — you've drifted off the correct downhill direction.
-
-The fix: compute both new values into temporary variables, then assign both at once. This guarantees you're always moving from the same point in parameter space.
 
 ### Pseudocode
 
 ```python
 # Initialize
-θ0 = 0.0
-θ1 = 0.0
-α  = 0.001   # learning rate — tune this
+theta0 = 0.0
+theta1 = 0.0
+alpha  = 0.001      # learning rate — tune this
 
-# Repeat until convergence
-for iteration in range(num_iterations):
-    errors = [θ0 + θ1 * x[i] - y[i] for i in range(m)]
+for _ in range(num_iterations):
+    # Steps 1 & 2: predictions and errors
+    errors = [(theta0 + theta1 * x[i] - y[i]) for i in range(m)]
 
-    grad0 = (1/m) * sum(errors)
-    grad1 = (1/m) * sum(errors[i] * x[i] for i in range(m))
+    # Step 3: gradients — both computed from the SAME old theta0, theta1
+    grad0 = (1 / m) * sum(errors)
+    grad1 = (1 / m) * sum(errors[i] * x[i] for i in range(m))
 
-    θ0 = θ0 - α * grad0    # simultaneous!
-    θ1 = θ1 - α * grad1    # simultaneous!
+    # Step 4: simultaneous update
+    theta0 = theta0 - alpha * grad0
+    theta1 = theta1 - alpha * grad1
+
+# Save to file
+save(theta0, theta1)
 ```
 
-### One iteration, step by step
+### J decreasing over training iterations
 
-```
-Step 1  Compute predictions hθ(xⁱ) for all cars
-        → use current θ₀ and θ₁ to predict prices
-
-Step 2  Compute errors eⁱ = hθ(xⁱ) − yⁱ
-        → positive error = we predicted too high
-        → negative error = we predicted too low
-
-Step 3  Compute both gradients (don't update yet!)
-        → grad₀ = mean of errors
-        → grad₁ = mean of (errors × mileages)
-
-Step 4  Update θ₀ and θ₁ simultaneously
-        → subtract α × gradient from each parameter
-
-↺  Repeat until convergence
+```mermaid
+xychart-beta
+    title "Cost J over training (healthy convergence)"
+    x-axis "Iteration (hundreds)" [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+    y-axis "J(theta0, theta1)" 0 --> 100
+    line [100, 55, 32, 20, 13, 9, 6, 5, 4, 3, 3]
 ```
 
-### Cost J decreasing over iterations
-
-```
-J
-^
-|*
-| *
-|  *
-|   **
-|     ***
-|        *****
-|              ***********
-+---------------------------------> iteration
-```
-
-Each iteration, the line fits the data a little better and J gets a little smaller.
+> J drops steeply at first, then flattens as we approach the minimum. If J goes **up** at any point, your learning rate α is too large.
 
 ---
 
 ## 7. Stopping Condition
 
-We stop when the parameters are no longer changing significantly.
-
-| Method | When to use |
+| Method | Description |
 |--------|-------------|
-| Fixed number of iterations | Simplest — just run for e.g. 10,000 iterations. Good enough for this project. |
-| `\|J(new) − J(old)\| < ε` | Stop when the cost barely changes between steps. More principled. |
-| Both gradients ≈ 0 | Stop when both `∂J/∂θ₀` and `∂J/∂θ₁` are near zero. True convergence check. |
+| Fixed iterations | Run for e.g. 10,000 iterations. Simple, works fine for this project. |
+| `\|J(new) − J(old)\| < ε` | Stop when the cost barely changes between steps. |
+| Both gradients ≈ 0 | Stop when `∂J/∂θ₀` and `∂J/∂θ₁` are both near zero. True convergence. |
+
+### Effect of learning rate α
+
+```mermaid
+flowchart LR
+    subgraph small["α too small"]
+        S1["Steps are tiny\nConverges eventually\nbut takes forever"]
+    end
+
+    subgraph good["α just right"]
+        G1["Steps are efficient\nConverges smoothly\nin reasonable iterations ✓"]
+    end
+
+    subgraph large["α too large"]
+        L1["Steps overshoot\nJ oscillates or grows\nnever converges ✗"]
+    end
+
+    small:::slow
+    good:::good
+    large:::bad
+
+    classDef slow fill:#fef9c3,stroke:#eab308,color:#713f12
+    classDef good fill:#dcfce7,stroke:#22c55e,color:#14532d
+    classDef bad  fill:#fee2e2,stroke:#ef4444,color:#7f1d1d
+```
 
 ### Why J is convex — there's only one minimum
 
-For linear regression, `J(θ₀, θ₁)` is a **convex** function — its graph is a perfect bowl shape. There are no local minima, no saddle points, no traps. Gradient descent with a reasonable learning rate is **guaranteed** to find the global minimum.
-
-### ❓ What if α (learning rate) is too large?
-
-If α is too large, each step **overshoots** the minimum. Instead of converging, J oscillates or even grows.
-
-```
-α too large:                    α just right:
-J ^                             J ^
-  |  *       *                    |*
-  |    *   *                      |  *
-  |      *                        |    **
-  |    *   *                      |      ***
-  |  *       *                    |         *****
-  +-----------> iter              +-----------> iter
-  (diverges or oscillates)        (converges smoothly)
-```
-
-The rule of thumb: start with `α = 0.001` or `α = 0.01` and watch J decrease. If J goes up, reduce α. If it converges very slowly, carefully increase α.
+For linear regression, `J(θ₀, θ₁)` is a **convex** function — a perfect bowl shape. There are no local minima, no saddle traps. Gradient descent is **guaranteed** to find the global minimum if α is not too large.
 
 ---
 
 ## 8. After Training — Making Predictions
 
-Once gradient descent has converged:
+```mermaid
+flowchart LR
+    subgraph train["Program 1 — train.py"]
+        T1["Read dataset\nmileages.csv"] --> T2["Normalize features\n(optional but recommended)"]
+        T2 --> T3["Run gradient descent\nuntil convergence"]
+        T3 --> T4["Save θ₀, θ₁\nto thetas.csv"]
+    end
 
-1. **Save θ₀ and θ₁** to a file (e.g. `thetas.csv` or `model.json`).
-2. **In the prediction program**, load θ₀ and θ₁ from that file.
-3. **For any input mileage x**, compute:
+    subgraph predict["Program 2 — predict.py"]
+        P1["Load θ₀, θ₁\nfrom thetas.csv\n(default 0,0 if missing)"] --> P2["Ask user:\n'Enter mileage'"]
+        P2 --> P3["price = θ₀ + θ₁ · mileage"]
+        P3 --> P4["Print estimated price"]
+    end
 
+    T4 -->|"θ₀, θ₁"| P1
 ```
-price = θ₀ + θ₁ · mileage
-```
 
-4. If no model has been trained yet, default to `θ₀ = 0, θ₁ = 0` → prediction is 0.
+The prediction formula is simply:
 
-That's it. The mandatory part has exactly two programs:
-- **Program 1 (training):** reads the dataset, runs gradient descent, saves θ₀ and θ₁.
-- **Program 2 (prediction):** loads θ₀ and θ₁, asks for a mileage, outputs the estimated price.
+$$\text{price} = \theta_0 + \theta_1 \cdot \text{mileage}$$
+
+> If no model has been trained yet (file missing or θ₀=θ₁=0), the prediction defaults to 0. That's the correct behavior per the subject.
 
 ---
 
@@ -343,30 +396,28 @@ That's it. The mandatory part has exactly two programs:
 
 ### All formulas in one place
 
-```
-Hypothesis:    hθ(x) = θ₀ + θ₁ · x
+$$h_\theta(x) = \theta_0 + \theta_1 \cdot x$$
 
-Cost:          J(θ₀, θ₁) = (1/2m) · Σ (hθ(xⁱ) − yⁱ)²
+$$J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right)^2$$
 
-Gradient θ₀:  ∂J/∂θ₀ = (1/m) · Σ (hθ(xⁱ) − yⁱ)
-Gradient θ₁:  ∂J/∂θ₁ = (1/m) · Σ (hθ(xⁱ) − yⁱ) · xⁱ
+$$\frac{\partial J}{\partial \theta_0} = \frac{1}{m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right)$$
 
-Update:        θ₀ := θ₀ − α · ∂J/∂θ₀
-               θ₁ := θ₁ − α · ∂J/∂θ₁   (simultaneously!)
-```
+$$\frac{\partial J}{\partial \theta_1} = \frac{1}{m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right) \cdot x^{(i)}$$
 
-### Key confusions answered
+$$\theta_0 := \theta_0 - \alpha \cdot \frac{\partial J}{\partial \theta_0} \qquad \theta_1 := \theta_1 - \alpha \cdot \frac{\partial J}{\partial \theta_1} \quad \text{(simultaneously!)}$$
 
-| Question | One-line answer | Full answer |
-|----------|----------------|-------------|
-| How can we compute J without the real hθ? | hθ is just our current guess, always computable. | [Section 2](#2-the-cost-function-jθ₀-θ₁) |
-| Why write J(θ₀, θ₁)? | J depends only on the parameters, not the fixed data. | [Section 2](#2-the-cost-function-jθ₀-θ₁) |
-| Why different formulas for θ₀ and θ₁? | θ₁ affects predictions scaled by mileage → needs xⁱ weighting. | [Section 4](#4-computing-the-partial-derivatives) |
-| Why the minus sign in the update? | It ensures we always move opposite to the slope → downhill. | [Section 5](#5-the-update-rule--why-the-minus-sign) |
-| What if slope is already negative (downhill)? | minus × negative = plus → we increase t → still downhill. | [Section 5](#5-the-update-rule--why-the-minus-sign) |
-| Why simultaneous update? | Both gradients must use the same old θ values. | [Section 6](#6-gradient-descent--the-full-algorithm) |
-| How do we know we're at the minimum? | Both gradients are (near) zero. J stops decreasing. | [Section 7](#7-stopping-condition) |
+### Every confusion, answered
+
+| Question | One-line answer | Section |
+|----------|----------------|---------|
+| How can we compute J without the real hθ? | hθ is just our current guess — always computable from θ₀, θ₁, and the data. | [§2](#2-the-cost-function-jθ₀-θ₁) |
+| Why write J(θ₀, θ₁)? | J depends only on the parameters; the data is fixed. | [§2](#2-the-cost-function-jθ₀-θ₁) |
+| Why different formulas for θ₀ and θ₁? | θ₁ rotates the line, so its effect scales with mileage → needs the xⁱ factor. | [§4](#4-computing-the-partial-derivatives) |
+| Why the minus sign in the update? | It moves us *opposite* to the slope — always downhill. | [§5](#5-the-update-rule--why-the-minus-sign) |
+| What if the slope is already negative? | minus × negative = plus → we increase t → still downhill. | [§5](#5-the-update-rule--why-the-minus-sign) |
+| Why simultaneous update with tmp variables? | Both gradients must use the same old θ values or we drift off the true direction. | [§6](#6-gradient-descent--the-full-algorithm) |
+| How do we know we're at the minimum? | Both gradients ≈ 0 and J stops decreasing. | [§7](#7-stopping-condition) |
 
 ---
 
-*Written as part of the 42 School ft_linear_regression project.*
+*Written as part of the 42 School `ft_linear_regression` project.*
