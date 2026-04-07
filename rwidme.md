@@ -55,13 +55,13 @@ xychart-beta
 
 ## 2. The Cost Function J(θ₀, θ₁)
 
-We need a single number that measures **how wrong our current line is**. We use the Mean Squared Error, divided by 2 for convenience:
+We need a single number that measures **how wrong our current line is**. We use the Mean Squared Error, divided by 2 for convenience (it will be canceled later at the derivative):
 
 $$J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2$$
 
 | Symbol | Meaning |
 |--------|---------|
-| $m$ | number of cars in the dataset |
+| $m$ | number of cars in the dataset (the average) |
 | $x^{(i)}$, $y^{(i)}$ | mileage and actual price of car $i$ |
 | $h_\theta(x^{(i)}) - y^{(i)}$ | error: predicted minus actual price |
 
@@ -80,11 +80,9 @@ graph TD
     Surface["J is a bowl-shaped surface above the θ₀–θ₁ plane\n\nImagine holding a salad bowl upside down and looking at it from above.\nEvery point on the rim = bad parameters. The bottom = best parameters."]
 
     Surface --> High1["🔴 High J\nBad θ₀, θ₁\n(line far from data)"]
-    Surface --> High2["🔴 High J\nBad θ₀, θ₁\n(line far from data)"]
     Surface --> Low["🟢 Minimum J\nBest θ₀, θ₁\n(line fits the data well)"]
 
     High1:::high
-    High2:::high
     Low:::low
 
     classDef high fill:#fee2e2,stroke:#ef4444,color:#7f1d1d
