@@ -27,6 +27,7 @@ $$
 $$
 <br><br><br>
 
+
 | Symbol | Meaning |
 |--------|---------|
 | $x$ | mileage (input feature) |
