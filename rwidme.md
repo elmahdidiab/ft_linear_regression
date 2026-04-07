@@ -25,7 +25,7 @@
 We assume that the price of a car depends **linearly** on its mileage. That means our model is a **straight line**:
 
 $$
-\LARGE h_\theta(x) = \theta_0 + \theta_1 \cdot x
+\LARGE\boxed h_\theta(x) = \theta_0 + \theta_1 \cdot x
 $$
 
 
@@ -281,7 +281,9 @@ That’s why the gradient for $\theta_1$ includes the additional factor.
 
 The core update formula is:
 
-$$\theta^{\text{new}} = \theta^{\text{old}} - \alpha \cdot f'(\theta^{\text{old}})$$
+$$
+\huge \theta^{\text{new}} = \theta^{\text{old}} - \alpha \cdot f'(\theta^{\text{old}})
+$$
 
 where $\alpha > 0$ is the **learning rate** (step size).
 
