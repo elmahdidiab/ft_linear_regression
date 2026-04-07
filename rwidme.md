@@ -25,7 +25,7 @@
 We assume that the price of a car depends **linearly** on its mileage. That means our model is a **straight line**:
 
 $$
-\Large h_\theta(x) = \theta_0 + \theta_1 \cdot x
+\LARGE h_\theta(x) = \theta_0 + \theta_1 \cdot x
 $$
 
 
@@ -57,7 +57,9 @@ xychart-beta
 
 We need a single number that measures **how wrong our current line is**. We use the Mean Squared Error, divided by 2 for convenience (it will be canceled later at the derivative):
 
-$$J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2$$
+$$
+\LARGE J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
+$$
 
 | Symbol | Meaning |
 |--------|---------|
@@ -268,19 +270,6 @@ That’s why the gradient for $\theta_1$ includes the additional factor.
 >
 > **θ₁** rotates the line — and the effect of that rotation grows with mileage. That's why the correction for θ₁ must be weighted by `xⁱ`.
 
-### Derivation sketch
-
-```
-J = (1/2m) · Σ (θ₀ + θ₁·x - y)²
-
-∂J/∂θ₀:  chain rule → 2·error · ∂θ₀/∂θ₀  =  2·error · 1
-          divide by 2m  →  (1/m) · Σ error
-
-∂J/∂θ₁:  chain rule → 2·error · ∂(θ₁·x)/∂θ₁  =  2·error · x
-          divide by 2m  →  (1/m) · Σ error · x
-```
-
-> The `2` from squaring cancels with the `2` in `2m` — that's the only reason we put it in J.
 
 ---
 
