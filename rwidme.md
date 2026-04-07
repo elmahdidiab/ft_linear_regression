@@ -25,8 +25,7 @@ We assume that the price of a car depends **linearly** on its mileage. That mean
 $$
 \Large h_\theta(x) = \theta_0 + \theta_1 \cdot x
 $$
-&nbsp;  
-&nbsp;
+
 
 
 | Symbol | Meaning |
