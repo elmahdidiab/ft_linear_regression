@@ -35,7 +35,7 @@ $$
 | $\theta_0$ | intercept — predicted price when mileage = 0 |
 | $\theta_1$ | slope — how much price changes per km |
 
-The project specifies that you start with **θ₀ = 0** and **θ₁ = 0**. That means your first prediction for every car is price = 0. That's completely wrong — but it doesn't matter. The algorithm will fix it.
+In this tutorial we will start with **θ₀ = 0** and **θ₁ = 0**. That means your first prediction for every car is price = 0. i know That's completely wrong😅 — but it doesn't matter. The algorithm will fix it later (trust the process).
 
 ```mermaid
 xychart-beta
