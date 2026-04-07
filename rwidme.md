@@ -159,7 +159,6 @@ Great question! The reason the derivative with respect to $\theta_1$ has an extr
 
 Let’s derive both derivatives step by step using the chain rule.
 
----
 
 ### 1. Recall the cost function
 
@@ -175,7 +174,7 @@ $$
 \frac{\partial J}{\partial \theta_1}
 $$
 
----
+
 
 ### 2. Derivative with respect to $\theta_0$
 
@@ -215,7 +214,7 @@ $$
 
 👉 No $x^{(i)}$ factor appears because the derivative of $u$ with respect to $\theta_0$ is **1**.
 
----
+
 
 ### 3. Derivative with respect to $\theta_1$
 
@@ -247,7 +246,7 @@ $$
 = \frac{1}{m} \sum_{i=1}^{m} \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right) \cdot x^{(i)}
 $$
 
----
+
 
 ### ✅ Key Insight
 
