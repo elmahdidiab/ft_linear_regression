@@ -155,8 +155,6 @@ $$\frac{\partial J}{\partial \theta_1} = \frac{1}{m} \sum_{i=1}^{m} \left( h_\th
 
 ### ❓ Confusion: "Why are the two formulas different? Why does θ₁ have an extra xⁱ?"
 
-### Why does the derivative w.r.t. $\theta_1$ include $x^{(i)}$?
-
 Great question! The reason the derivative with respect to $\theta_1$ has an extra factor $x^{(i)}$ is because the hypothesis depends on $\theta_1$ in a way that is multiplied by the mileage.
 
 Let’s derive both derivatives step by step using the chain rule.
@@ -164,41 +162,59 @@ Let’s derive both derivatives step by step using the chain rule.
 ---
 
 ### 1. Recall the cost function
+
 $$
 J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( \underbrace{\theta_0 + \theta_1 x^{(i)}}_{h_\theta(x^{(i)})} - y^{(i)} \right)^2
 $$
+
 We want:
+
 $$
 \frac{\partial J}{\partial \theta_0}
 \quad \text{and} \quad
 \frac{\partial J}{\partial \theta_1}
 $$
+
 ---
+
 ### 2. Derivative with respect to $\theta_0$
+
 Treat $\theta_1$ as constant.
+
 Let:
+
 $$
 u = \theta_0 + \theta_1 x^{(i)} - y^{(i)}
 $$
+
 Then the cost term becomes:
+
 $$
 \frac{1}{2m} u^2
 $$
+
 Now apply the chain rule:
+
 $$
 \frac{d}{d\theta_0} \left( \frac{1}{2m} u^2 \right)
 = \frac{1}{2m} \cdot 2u \cdot \frac{\partial u}{\partial \theta_0}
 $$
+
 Since:
+
 $$
 \frac{\partial u}{\partial \theta_0} = 1
 $$
+
 We get:
+
 $$
 \frac{\partial J}{\partial \theta_0}
 = \frac{1}{m} \sum_{i=1}^{m} \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right)
 $$
+
 👉 No $x^{(i)}$ factor appears because the derivative of $u$ with respect to $\theta_0$ is **1**.
+
 ---
 
 ### 3. Derivative with respect to $\theta_1$
