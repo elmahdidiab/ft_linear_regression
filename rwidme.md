@@ -58,7 +58,9 @@ xychart-beta
 We need a single number that measures **how wrong our current line is**. We use the Mean Squared Error, divided by 2 for convenience (it will be canceled later at the derivative):
 
 $$
-\huge J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
+\huge \color{cyan}{
+J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
+}
 $$
 
 | Symbol | Meaning |
@@ -152,11 +154,15 @@ The downhill direction is always **opposite to the sign** of each partial deriva
 Applying the chain rule to J gives us:
 
 $$
-\huge\frac{\partial J}{\partial \theta_0} = \frac{1}{m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)
+\huge \color{cyan}{
+\frac{\partial J}{\partial \theta_0} = \frac{1}{m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)
+}
 $$
 
 $$
-\huge\frac{\partial J}{\partial \theta_1} = \frac{1}{m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right) \cdot x^{(i)}
+\huge \color{cyan}{
+\frac{\partial J}{\partial \theta_1} = \frac{1}{m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right) \cdot x^{(i)}
+}
 $$
 
 ### ❓ Confusion: "Why are the two formulas different? Why does θ₁ have an extra xⁱ?"
@@ -282,7 +288,9 @@ That’s why the gradient for $\theta_1$ includes the additional factor.
 The core update formula is:
 
 $$
-\huge \theta^{\text{new}} = \theta^{\text{old}} - \alpha \cdot f'(\theta^{\text{old}})
+\huge \color{cyan}{
+\theta^{\text{new}} = \theta^{\text{old}} - \alpha \cdot f'(\theta^{\text{old}})
+}
 $$
 
 where $\alpha > 0$ is the **learning rate** (step size).
