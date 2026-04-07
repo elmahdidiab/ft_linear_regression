@@ -155,20 +155,117 @@ $$\frac{\partial J}{\partial \theta_1} = \frac{1}{m} \sum_{i=1}^{m} \left( h_\th
 
 ### ❓ Confusion: "Why are the two formulas different? Why does θ₁ have an extra xⁱ?"
 
-```mermaid
-flowchart TD
-    A["Change θ₀ by +1"] --> B["Every prediction shifts by exactly +1\nregardless of mileage\n\nhθ(x) = (θ₀+1) + θ₁·x"]
-    B --> C["Effect on J only depends on the\naverage error → no xⁱ factor"]
+### Why does the derivative w.r.t. $\theta_1$ include $x^{(i)}$?
 
-    D["Change θ₁ by +1"] --> E["Prediction for car i shifts by +xⁱ\na 200 000 km car is affected\n200 000× more than a 1 km car\n\nhθ(x) = θ₀ + (θ₁+1)·x"]
-    E --> F["Effect on J must be weighted\nby each car's mileage → multiply by xⁱ"]
+Great question! The reason the derivative with respect to $\theta_1$ has an extra factor $x^{(i)}$ is because the hypothesis depends on $\theta_1$ in a way that is multiplied by the mileage.
 
-    C:::theta0
-    F:::theta1
+Let’s derive both derivatives step by step using the chain rule.
 
-    classDef theta0 fill:#dbeafe,stroke:#3b82f6,color:#1e3a8a
-    classDef theta1 fill:#fef9c3,stroke:#eab308,color:#713f12
-```
+---
+
+### 1. Recall the cost function
+
+$$
+J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( \underbrace{\theta_0 + \theta_1 x^{(i)}}_{h_\theta(x^{(i)})} - y^{(i)} \right)^2
+$$
+
+We want:
+
+$$
+\frac{\partial J}{\partial \theta_0}
+\quad \text{and} \quad
+\frac{\partial J}{\partial \theta_1}
+$$
+
+---
+
+### 2. Derivative with respect to $\theta_0$
+
+Treat $\theta_1$ as constant.
+
+Let:
+
+$$
+u = \theta_0 + \theta_1 x^{(i)} - y^{(i)}
+$$
+
+Then the cost term becomes:
+
+$$
+\frac{1}{2m} u^2
+$$
+
+Now apply the chain rule:
+
+$$
+\frac{d}{d\theta_0} \left( \frac{1}{2m} u^2 \right)
+= \frac{1}{2m} \cdot 2u \cdot \frac{\partial u}{\partial \theta_0}
+$$
+
+Since:
+
+$$
+\frac{\partial u}{\partial \theta_0} = 1
+$$
+
+We get:
+
+$$
+\frac{\partial J}{\partial \theta_0}
+= \frac{1}{m} \sum_{i=1}^{m} \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right)
+$$
+
+👉 No $x^{(i)}$ factor appears because the derivative of $u$ with respect to $\theta_0$ is **1**.
+
+---
+
+### 3. Derivative with respect to $\theta_1$
+
+Now treat $\theta_0$ as constant.
+
+Again:
+
+$$
+u = \theta_0 + \theta_1 x^{(i)} - y^{(i)}
+$$
+
+Apply the chain rule:
+
+$$
+\frac{d}{d\theta_1} \left( \frac{1}{2m} u^2 \right)
+= \frac{1}{2m} \cdot 2u \cdot \frac{\partial u}{\partial \theta_1}
+$$
+
+But now:
+
+$$
+\frac{\partial u}{\partial \theta_1} = x^{(i)}
+$$
+
+So:
+
+$$
+\frac{\partial J}{\partial \theta_1}
+= \frac{1}{m} \sum_{i=1}^{m} \left( \theta_0 + \theta_1 x^{(i)} - y^{(i)} \right) \cdot x^{(i)}
+$$
+
+---
+
+### ✅ Key Insight
+
+The extra $x^{(i)}$ comes from differentiating:
+
+$$
+\theta_1 x^{(i)}
+$$
+
+with respect to $\theta_1$, which gives:
+
+$$
+x^{(i)}
+$$
+
+That’s why the gradient for $\theta_1$ includes the additional factor.
 
 > **θ₀** shifts the whole line up/down uniformly — same effect on every car.
 >
