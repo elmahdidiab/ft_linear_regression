@@ -75,6 +75,8 @@ $$J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) -
 
 ### How J looks as a surface
 
+![Graph of the bowl J](bowlJ)
+
 ```mermaid
 graph TD
     Surface["J is a bowl-shaped surface above the θ₀–θ₁ plane\n\nImagine holding a salad bowl upside down and looking at it from above.\nEvery point on the rim = bad parameters. The bottom = best parameters."]
