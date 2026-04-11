@@ -47,7 +47,7 @@ xychart-beta
     line [0, 0, 0, 0, 0, 0]
     line [18000, 15500, 13000, 10500, 8000, 5500]
 ```
-![Graph of before/after training](before-after_training_graph)
+![Graph of before/after training](before_vs_after_training.png)
 
 > **Flat line** = starting guess (θ₀=0, θ₁=0). **Sloped line** = after training. Gradient descent moves us from one to the other.
 
