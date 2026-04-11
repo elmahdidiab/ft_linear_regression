@@ -39,14 +39,6 @@ $$
 
 In this tutorial we will start with **θ₀ = 0** and **θ₁ = 0**. That means your first prediction for every car is price = 0. i know That's completely wrong😅 — but it doesn't matter. The algorithm will fix it later (trust the process).
 
-```mermaid
-xychart-beta
-    title "Price vs Mileage — Before and After Training"
-    x-axis "Mileage (km)" [0, 50000, 100000, 150000, 200000, 250000]
-    y-axis "Price (euros)" 0 --> 20000
-    line [0, 0, 0, 0, 0, 0]
-    line [18000, 15500, 13000, 10500, 8000, 5500]
-```
 ![Graph of before/after training](before_vs_after_training.png)
 
 > **Flat line** = starting guess (θ₀=0, θ₁=0). **Sloped line** = after training. Gradient descent moves us from one to the other.
