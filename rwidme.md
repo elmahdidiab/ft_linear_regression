@@ -24,10 +24,9 @@
 
 We assume that the price of a car depends **linearly** on its mileage. That means our model is a **straight line**:
 
-$$
-\Huge{\color{cyan}{h_\theta(x) = \theta_0 + \theta_1 \cdot x}}
-$$
-
+```math
+h_\theta(x) = \theta_0 + \theta_1 \cdot x
+```
 
 
 | Symbol | Meaning |
