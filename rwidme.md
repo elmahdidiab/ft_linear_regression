@@ -94,6 +94,10 @@ graph TD
 
 > Because J depends **only** on θ₀ and θ₁. The data never changes. Writing `J(θ₀, θ₁)` makes it explicit: the only knobs we control are the two parameters. Our goal is to find the (θ₀, θ₁) pair that makes J as small as possible.
 
+### ❓ Confusion: "How do we know J(θ₀, θ₁) is bowl‑shaped?"
+
+### ❓ Confusion: "Is that why we squared the error??"
+
 ---
 
 ## 3. Why We Need Derivatives
