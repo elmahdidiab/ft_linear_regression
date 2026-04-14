@@ -68,7 +68,7 @@ $$
 
 ### How J looks as a surface
 
-![Graph of the bowl J](bowlJ)
+![Graph of the bowl J](graphe_JFunction)
 
 ```mermaid
 graph TD
@@ -96,7 +96,7 @@ graph TD
 
 ### ❓ Confusion: "How do we know J(θ₀, θ₁) is bowl‑shaped?"
 
-### ❓ Confusion: "Is that why we squared the error??"
+### ❓ Confusion: "Is that why we squared the error?"
 
 ---
 
