@@ -92,14 +92,14 @@ The bottom of the bowl IS the trained model. Not a step toward it — it IS it.
 > Because J depends **only** on θ₀ and θ₁. The data never changes. Writing `J(θ₀, θ₁)` makes it explicit: the only knobs we control are the two parameters. Our goal is to find the (θ₀, θ₁) pair that makes J as small as possible.
 
 ### ❓ Confusion: "How do we know J(θ₀, θ₁) is bowl‑shaped?"
-Because the formula of J is 
+> Because the formula of J is 
 $${
 J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
 }$$
 If you expand the square, you get terms like `θ₀²,θ₁²`, `θ₀,θ₁` and with positive coefficients (because of the square). A function that is a sum of squares is always convex – it curves upward like a bowl. There is only one bottom. This is a mathematical fact, not a guess.
 
 ### ❓ Confusion: "Is that why we squared² the error?"
-Yes, exactly.
+> Yes, exactly. 
 If we did not square the error (e.g., used absolute value or no exponent), the function would not be a smooth bowl. It might be V‑shaped (still convex but sharp) or not even convex at all. Squaring gives us a nice, smooth, bowl‑shaped surface that we can easily minimise using derivatives (gradient descent). It also has the useful property that large errors are penalised more heavily.
 So: squaring → bowl shape → easy to find the minimum with calculus.
 
