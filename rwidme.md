@@ -93,12 +93,12 @@ The bottom of the bowl IS the trained model. Not a step toward it — it IS it.
 
 ### ❓ Confusion: "How do we know J(θ₀, θ₁) is bowl‑shaped?"
 > Because the formula of J is 
-
+>
 $${
 J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
 }$$
-
-If you expand the square, you get terms like `θ₀²,θ₁²`, `θ₀,θ₁` and with positive coefficients (because of the square). A function that is a sum of squares is always convex – it curves upward like a bowl. There is only one bottom. This is a mathematical fact, not a guess.
+>
+> If you expand the square, you get terms like `θ₀²,θ₁²`, `θ₀,θ₁` and with positive coefficients (because of the square). A function that is a sum of squares is always convex – it curves upward like a bowl. There is only one bottom. This is a mathematical fact, not a guess.
 
 ### ❓ Confusion: "Is that why we squared² the error?"
 > Yes, exactly. 
