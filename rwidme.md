@@ -71,6 +71,15 @@ This graph is a representation of how the J function looks like. As you can see,
 
 ![Graph of the bowl J](graphe_JFunction)
 
+### radient descent is a ball rolling down the bowl; each step improves the line
+Left and right panels are two views of the same process. Each step down the bowl (left)
+corresponds to a rotation of the regression line toward the data (right).
+When the ball stops at the bottom, the gradient is zero, the line no longer moves,
+and you have found the unique θ₁ that minimises total squared error across all data points.
+The bottom of the bowl IS the trained model. Not a step toward it — it IS it.
+
+![Graph of the bowl J](parabolaToRegressionLine)
+
 
 ### ❓ Confusion: "How can we compute J if we don't have the real hθ?"
 
