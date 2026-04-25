@@ -71,7 +71,7 @@ This graph is a representation of how the J function looks like. As you can see,
 
 ![Graph of the bowl J](graphe_JFunction)
 
-### radient descent is a ball rolling down the bowl; each step improves the line
+### Gradient descent is a ball rolling down the bowl; each step improves the line
 Left and right panels are two views of the same process. Each step down the bowl (left)
 corresponds to a rotation of the regression line toward the data (right).
 When the ball stops at the bottom, the gradient is zero, the line no longer moves,
