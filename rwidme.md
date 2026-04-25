@@ -71,19 +71,6 @@ This graph is a representation of how the J function looks like. As you can see,
 
 ![Graph of the bowl J](graphe_JFunction)
 
-```mermaid
-graph TD
-    Surface["J is a bowl-shaped surface above the θ₀–θ₁ plane\n\nImagine holding a salad bowl upside down and looking at it from above.\nEvery point on the rim = bad parameters. The bottom = best parameters."]
-
-    Surface --> High1["🔴 High J\nBad θ₀, θ₁\n(line far from data)"]
-    Surface --> Low["🟢 Minimum J\nBest θ₀, θ₁\n(line fits the data well)"]
-
-    High1:::high
-    Low:::low
-
-    classDef high fill:#fee2e2,stroke:#ef4444,color:#7f1d1d
-    classDef low  fill:#dcfce7,stroke:#22c55e,color:#14532d
-```
 
 ### ❓ Confusion: "How can we compute J if we don't have the real hθ?"
 
