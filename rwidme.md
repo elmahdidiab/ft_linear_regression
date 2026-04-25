@@ -97,7 +97,7 @@ The bottom of the bowl IS the trained model. Not a step toward it — it IS it.
 
 ---
 
-## 3. Why We Need Derivatives
+## 3. How to Slope `θ₀,θ₁` to The minimum (Using Derivatives)
 
 Think of `J(θ₀, θ₁)` as a landscape — a bowl-shaped surface. To navigate downhill, we need to know the **slope of the surface** in each direction. That's what derivatives give us.
 
