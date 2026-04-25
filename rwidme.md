@@ -92,6 +92,7 @@ The bottom of the bowl IS the trained model. Not a step toward it — it IS it.
 > Because J depends **only** on θ₀ and θ₁. The data never changes. Writing `J(θ₀, θ₁)` makes it explicit: the only knobs we control are the two parameters. Our goal is to find the (θ₀, θ₁) pair that makes J as small as possible.
 
 ### ❓ Confusion: "How do we know J(θ₀, θ₁) is bowl‑shaped?"
+h_\theta(x) = \theta_0 + \theta_1 \cdot x
 
 ### ❓ Confusion: "Is that why we squared the error?"
 
