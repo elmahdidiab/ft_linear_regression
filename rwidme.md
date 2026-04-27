@@ -50,7 +50,7 @@ $$
 \huge \color{cyan}{
 J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
 }
-$$
+$$ 
 
 | Symbol | Meaning |
 |--------|---------|
