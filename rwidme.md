@@ -8,6 +8,7 @@
 
 ## Table of Contents
 
+0. [Full Project Overview](#0-Global-Overview)
 1. [The Hypothesis — Our Prediction Line](#1-the-hypothesis--our-prediction-line)
 2. [The Cost Function J(θ₀, θ₁)](#2-the-cost-function-jθ₀-θ₁)
 3. [Why We Need Derivatives](#3-why-we-need-derivatives)
@@ -19,6 +20,62 @@
 9. [Quick-Reference Summary](#9-quick-reference-summary)
 
 ---
+## 0. Global Overview
+
+🚗 ft_linear_regression – Global Overview
+What’s the purpose of this project?
+We have a dataset with car mileage (input) and car price (output).
+We want to train a model so that later, when you give it a new mileage, it can predict the price automatically.
+
+Think of it as:
+👉 You enter mileage → the model replies with estimated price.
+
+How do we achieve that? (Step by step, simply)
+1. Visualise the data
+We plot all the data points on a graph (mileage on the horizontal axis, price on the vertical axis).
+Our goal is to draw a straight line that goes through the “middle” of all those points – the line that best represents the trend.
+
+2. Why do we need that line?
+Because with that line, we can predict the price for any mileage (even ones not in the dataset).
+The line is our model – it tells us the relationship between mileage and price.
+
+3. How do we draw a line?
+A straight line needs two variables to be defined.
+In our case, those variables are called θ₀ (intercept) and θ₁ (slope).
+The line is:
+
+price = θ₀ + θ₁ × mileage
+
+4. Start with a flat line (zero knowledge)
+We begin with θ₀ = 0 and θ₁ = 0 – that’s a flat line at price 0 (very wrong, but it’s a starting point).
+
+5. Measure the error (how wrong is our line?)
+For every data point, we calculate the distance between the point and our current line.
+The total error tells us how “bad” the line is.
+
+If the points lie exactly on a straight line, we can reach error = 0 (perfect).
+
+In real data, points rarely line up perfectly, but we can get the error very small – that means our line fits the data as well as possible.
+
+6. The error function is a bowl 🥣
+If we plot the error for all possible values of θ₀ and θ₁, we get a parabolic bowl shape.
+The bottom of the bowl is where the error is smallest – that’s where our best line lives.
+
+7. Walk downhill to the bottom (gradient descent)
+We repeatedly adjust θ₀ and θ₁ to move downhill on the bowl surface, always reducing the error.
+This is called gradient descent.
+We keep going until we reach the very bottom – then we have the best values for θ₀ and θ₁.
+
+8. Save the trained model 💪
+Once we have those optimal θ₀ and θ₁, we save them.
+Now our model is trained!
+We can use it to predict any car’s price from its mileage.
+
+In a nutshell:
+We start with a random line → measure the error → adjust the line step by step → until the error is minimal → that final line is our predictor. 🚀😂
+
+
+
 
 ## 1. The Hypothesis — Our Prediction Line
 
