@@ -66,6 +66,7 @@ Once we have those optimal θ₀ and θ₁, we save them.
 Now our model is trained!
 We can use it to predict any car’s price from its mileage.
 
+---
 
 ## 1. The Hypothesis — Our Prediction Line
 
