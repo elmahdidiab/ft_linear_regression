@@ -42,9 +42,7 @@ The line is our model – it tells us the relationship between mileage and price
 3. How do we draw a line?
 A straight line needs two variables to be defined.
 In our case, those variables are called θ₀ (intercept) and θ₁ (slope).
-The line is:
-
-price = θ₀ + θ₁ × mileage
+The line is: price = θ₀ + θ₁ × mileage
 
 4. Start with a flat line (zero knowledge)
 We begin with θ₀ = 0 and θ₁ = 0 – that’s a flat line at price 0 (very wrong, but it’s a starting point).
