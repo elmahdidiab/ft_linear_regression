@@ -49,11 +49,7 @@ We begin with θ₀ = 0 and θ₁ = 0 – that’s a flat line at price 0 (very 
 
 5. Measure the error (how wrong is our line?)
 For every data point, we calculate the distance between the point and our current line.
-The total error tells us how “bad” the line is.
-
-If the points lie exactly on a straight line, we can reach error = 0 (perfect).
-
-In real data, points rarely line up perfectly, but we can get the error very small – that means our line fits the data as well as possible.
+The total error tells us how “bad” the line is. If the points lie exactly on a straight line, we can reach error = 0 (perfect). In real data, points rarely line up perfectly, but we can get the error very small – that means our line fits the data as well as possible.
 
 6. The error function is a bowl 🥣
 If we plot the error for all possible values of θ₀ and θ₁, we get a parabolic bowl shape.
