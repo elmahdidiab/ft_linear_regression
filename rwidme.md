@@ -49,26 +49,22 @@ We begin with θ₀ = 0 and θ₁ = 0 – that’s a flat line at price 0 (very 
 
 5. Measure the error (how wrong is our line?)
 For every data point, we calculate the distance between the point and our current line.
-The total error tells us how “bad” the line is. If the points lie exactly on a straight line, we can reach error = 0 (perfect). In real data, points rarely line up perfectly, but we can get the error very small – that means our line fits the data as well as possible.
+The total error tells us how “bad” the line is. If the points lie exactly on a straight line, we can reach error = 0 (perfect). In real data, points rarely line up perfectly, but we can get the error very small – that means our line fits the data as well as possible. So We measure how wrong it is (the error/the line), then we change θ₀ and θ₁ a little bit and draw a new line. We measure the error again. We repeat this over and over – each time we try to draw a better line – until the error becomes very small. But how do we know how to change θ₀ and θ₁? We don’t change them randomly. We need a smart way to know: Should we increase θ₀ or decrease it? Should we increase θ₁ or decrease it? By how much? That’s where the derivative comes in.
 
-6. The error function is a bowl 🥣
-If we plot the error for all possible values of θ₀ and θ₁, we get a parabolic bowl shape.
-The bottom of the bowl is where the error is smallest – that’s where our best line lives.
-
-7. Walk downhill to the bottom (gradient descent)
-We repeatedly adjust θ₀ and θ₁ to move downhill on the bowl surface, always reducing the error.
+6. The error function is a bowl – we want the bottom
+Remember that the error function, J(θ₀,θ₁), has a parabolic bowl shape.
+The bottom of the bowl is where the error is smallest – that’s our goal. To reach the bottom, we need to move θ₀ and θ₁ downhill on that bowl surface. “Downhill” means: if we are on the left side of the bowl, we move right (increase θ); if on the right side, we move left (decrease θ). Mathematically, we calculate the partial derivative of J with respect to θ₀ and θ₁. The derivative tells us the slope of the bowl at our current position: If the slope is positive → moving right increases the error → we should decrease θ. If the slope is negative → moving right decreases the error → we should increase θ. Then we update θ₀ and θ₁ by a small step opposite to the slope.
 This is called gradient descent.
-We keep going until we reach the very bottom – then we have the best values for θ₀ and θ₁.
+
+7. Keep stepping downhill until we reach the bottom
+We repeat this process: Compute the derivatives (slopes)->Adjust θ₀ and θ₁ a little->Redraw the line->Measure the error again. After many steps, the error stops decreasing.
+We have reached the bottom of the bowl – the best possible line that fits our data.
+Then we save θ₀ and θ₁, and our model is trained!
 
 8. Save the trained model 💪
 Once we have those optimal θ₀ and θ₁, we save them.
 Now our model is trained!
 We can use it to predict any car’s price from its mileage.
-
-In a nutshell:
-We start with a random line → measure the error → adjust the line step by step → until the error is minimal → that final line is our predictor. 🚀😂
-
-
 
 
 ## 1. The Hypothesis — Our Prediction Line
@@ -118,7 +114,7 @@ $$
 | **Divide by 2** | Pure convenience: the 2 cancels when we take the derivative, making the formula cleaner. It doesn't change *where* the minimum is. |
 
 ### How J looks as a surface
-This graph is a representation of how the J function looks like. As you can see, it is a parabolic‑shaped surface (because of squaring the error). So our objective is reaching the minimum (the bottom) of the function; the point where the cost is lowest, because the value of J represents the total error of our model. The lower J is, the closer our predictions are to the actual prices. Therefore, by finding the parameters θ0,θ1 that minimise J, we obtain the most accurate linear regression line for our dataset.
+This graph is a representation of how the J function looks like. As you can see, it is a parabolic‑shaped surface (because of squaring the error). So our objective is reaching the minimum (the bottom) of the function; the point where the cost is lowest, because the value of J represents the total error of our model. The lower J is, the closer our predictions are to the actual prices. Therefore, by finding the parameters θ₀,θ₁ that minimise J, we obtain the most accurate linear regression line for our dataset.
 
 ![Graph of the bowl J](graphe_JFunction)
 
