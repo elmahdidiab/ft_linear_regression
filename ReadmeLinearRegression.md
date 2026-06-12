@@ -571,5 +571,3 @@ $$\theta_0 := \theta_0 - \alpha \cdot \frac{\partial J}{\partial \theta_0} \qqua
 | How do we know we're at the minimum? | Both gradients ≈ 0 and J stops decreasing. | [§7](#7-stopping-condition) |
 
 ---
-
-*Written as part of the 42 School `ft_linear_regression` project.*
