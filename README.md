@@ -579,16 +579,35 @@ $$\frac{\partial J}{\partial \theta_1} = \frac{1}{m} \sum_{i=1}^{m} \left(h_\the
 
 $$\theta_0 := \theta_0 - \alpha \cdot \frac{\partial J}{\partial \theta_0} \qquad \theta_1 := \theta_1 - \alpha \cdot \frac{\partial J}{\partial \theta_1} \quad \text{(simultaneously!)}$$
 
-### Every confusion, answered
-
-| Question | One-line answer | Section |
-|----------|----------------|---------|
-| How can we compute J without the real hθ? | hθ is just our current guess — always computable from θ₀, θ₁, and the data. | [§2](#2-the-cost-function-jθ₀-θ₁) |
-| Why write J(θ₀, θ₁)? | J depends only on the parameters; the data is fixed. | [§2](#2-the-cost-function-jθ₀-θ₁) |
-| Why different formulas for θ₀ and θ₁? | θ₁ rotates the line, so its effect scales with mileage → needs the xⁱ factor. | [§4](#4-computing-the-partial-derivatives) |
-| Why the minus sign in the update? | It moves us *opposite* to the slope — always downhill. | [§5](#5-the-update-rule--why-the-minus-sign) |
-| What if the slope is already negative? | minus × negative = plus → we increase t → still downhill. | [§5](#5-the-update-rule--why-the-minus-sign) |
-| Why simultaneous update with tmp variables? | Both gradients must use the same old θ values or we drift off the true direction. | [§6](#6-gradient-descent--the-full-algorithm) |
-| How do we know we're at the minimum? | Both gradients ≈ 0 and J stops decreasing. | [§7](#7-stopping-condition) |
 
 ---
+
+## Academic Integrity
+
+Some provisioning and automation scripts have been intentionally omitted
+from the public repository to discourage direct reuse of the project by
+students currently completing the 42 curriculum.
+
+The repository still contains the architecture, configuration, manifests,
+documentation, and deployment design.
+
+The complete implementation can be demonstrated during technical interviews.
+
+## Project Structure
+
+```
+.
+├── mandatory/                   # 
+│   ├── data.csv
+│   ├── predict.py
+│   ├── theta.json
+│   └── train.py
+│
+└── bonus/                # ...
+    ├── plot.py           
+    ├── precision.py      
+
+```
+
+---
+
