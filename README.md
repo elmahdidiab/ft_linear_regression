@@ -166,7 +166,7 @@ So: squaring → bowl shape → easy to find the minimum with calculus.
 
 ## 3. How to Slope `θ₀,θ₁` to The minimum (Using Derivatives)
 
-![trained model plot](sloppingThetas.gif)
+![trained model plot](sloppingThetas2.gif)
 
 ![trained model plot](sloppingCircles.png)
 
