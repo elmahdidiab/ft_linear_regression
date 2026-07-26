@@ -114,6 +114,10 @@ $$
 | **Divide by m** | Gets the average — so J doesn't grow just because the dataset is larger. |
 | **Divide by 2** | Pure convenience: the 2 cancels when we take the derivative, making the formula cleaner. It doesn't change *where* the minimum is. |
 
+### Error Computing
+
+![trained model plot](error_computing.png)
+
 ### How J looks as a surface
 This graph is a representation of how the J function looks like. As you can see, it is a parabolic‑shaped surface (because of squaring the error). So our objective is reaching the minimum (the bottom) of the function; the point where the cost is lowest, because the value of J represents the total error of our model. The lower J is, the closer our predictions are to the actual prices. Therefore, by finding the parameters θ₀,θ₁ that minimise J, we obtain the most accurate linear regression line for our dataset.
 
