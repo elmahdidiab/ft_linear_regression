@@ -380,6 +380,11 @@ flowchart TD
     classDef increase fill:#dcfce7,stroke:#22c55e,color:#14532d
 ```
 
+### Choosing the best Learning rate?
+your "learning rate too large / just right / too small" section is currently just three colored text boxes with no visual. Here's what those three cases actually look like as paths down the bowl:
+![trained model plot](learningRate.png)
+
+
 ### ❓ The key insight that clears the blur
 
 > The minus sign encodes **"move opposite to the slope"** in one operation. You don't need to check the sign yourself and decide which direction — the formula handles it automatically.
