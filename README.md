@@ -159,6 +159,9 @@ J(\theta_0, \theta_1) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y
 If we did not square the error (e.g., used absolute value or no exponent), the function would not be a smooth bowl. It might be V‑shaped (still convex but sharp) or not even convex at all. Squaring gives us a nice, smooth, bowl‑shaped surface that we can easily minimise using derivatives (gradient descent). It also has the useful property that large errors are penalised more heavily.
 So: squaring → bowl shape → easy to find the minimum with calculus.
 
+### ❓ Confusion: "Why we chose the squared² error, not the ABSOLUT VALUE |e²|?"
+![trained model plot](AVvsSE.png)
+
 ---
 
 ## 3. How to Slope `θ₀,θ₁` to The minimum (Using Derivatives)
