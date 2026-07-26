@@ -117,7 +117,7 @@ $$
 | **Divide by 2** | Pure convenience: the 2 cancels when we take the derivative, making the formula cleaner. It doesn't change *where* the minimum is. |
 
 ### Error Computing
-
+Descriong...
 ![trained model plot](error_computing.png)
 
 ### How J looks as a surface
@@ -165,6 +165,10 @@ So: squaring → bowl shape → easy to find the minimum with calculus.
 ---
 
 ## 3. How to Slope `θ₀,θ₁` to The minimum (Using Derivatives)
+
+![trained model plot](sloppingThetas.gif)
+
+![trained model plot](sloppingCircles.png)
 
 Think of `J(θ₀, θ₁)` as a landscape — a bowl-shaped surface. To navigate downhill, we need to know the **slope of the surface** in each direction. That's what derivatives give us.
 
