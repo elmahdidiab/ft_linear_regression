@@ -380,7 +380,7 @@ flowchart TD
     classDef increase fill:#dcfce7,stroke:#22c55e,color:#14532d
 ```
 
-### ❓ Choosing the best Learning rate?
+### ❓ Choosing the best learning rate?
 
 your "learning rate too large / just right / too small" section is currently just three colored text boxes with no visual. Here's what those three cases actually look like as paths down the bowl
 
