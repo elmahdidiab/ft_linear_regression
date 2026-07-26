@@ -117,7 +117,8 @@ $$
 | **Divide by 2** | Pure convenience: the 2 cancels when we take the derivative, making the formula cleaner. It doesn't change *where* the minimum is. |
 
 ### Error Computing
-Descriong...
+At each iteration, the model predicts the price of every car and computes the error between the predicted and actual values. These errors are used to calculate the cost function J, which measures how well the current regression line fits the data. Gradient descent then updates the parameters θ₀ and θ₁ to reduce this error. This process is repeated until the cost stops decreasing, resulting in the best-fitting regression line.
+
 ![trained model plot](error_computing.png)
 
 ### How J looks as a surface
