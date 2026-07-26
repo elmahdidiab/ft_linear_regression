@@ -2,7 +2,7 @@
 
 > A complete, step-by-step guide to the mandatory part — with math, diagrams, and every confusion answered inline.
 
-![trained model plot](linearRegressionGIF.gif)
+![trained model plot](linearRegressionGIF2.gif)
 
 ![trained model plot](plot.png)
 
