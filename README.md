@@ -133,7 +133,7 @@ When the ball stops at the bottom, the gradient is zero, the line no longer move
 and you have found the unique θ₁ that minimises total squared error across all data points.
 The bottom of the bowl IS the trained model. Not a step toward it — it IS it.
 
-![Graph of the bowl J](mediaparabolaToRegressionLine)
+![Graph of the bowl J](media/parabolaToRegressionLine)
 
 
 ### ❓ Confusion: "How can we compute J if we don't have the real hθ?"
