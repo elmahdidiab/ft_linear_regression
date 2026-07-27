@@ -2,9 +2,9 @@
 
 > A complete, step-by-step guide to the mandatory part — with math, diagrams, and every confusion answered inline.
 
-![trained model plot](linearRegressionGIF2.gif)
+![trained model plot](media/linearRegressionGIF2.gif)
 
-![trained model plot](plot.png)
+![trained model plot](media/plot.png)
 
 ---
 
@@ -86,7 +86,7 @@ $$ \Huge{\color{cyan}{h_\theta(x) = \theta_0 + \theta_1 \cdot x}} $$
 
 In this tutorial we will start with **θ₀ = 0** and **θ₁ = 0**. That means your first prediction for every car is price = 0. i know That's completely wrong😅 — but it doesn't matter. The algorithm will fix it later (trust the process).
 
-![Graph of before/after training](before_vs_after_training.png)
+![Graph of before/after training](media/before_vs_after_training.png)
 
 > **Flat line** = starting guess (θ₀=0, θ₁=0). **Sloped line** = after training. Gradient descent moves us from one to the other.
 
@@ -119,12 +119,12 @@ $$
 ### Error Computing
 At each iteration, the model predicts the price of every car and computes the error between the predicted and actual values. These errors are used to calculate the cost function J, which measures how well the current regression line fits the data. Gradient descent then updates the parameters θ₀ and θ₁ to reduce this error. This process is repeated until the cost stops decreasing, resulting in the best-fitting regression line.
 
-![trained model plot](error_computing.png)
+![trained model plot](media/error_computing.png)
 
 ### How J looks as a surface
 This graph is a representation of how the J function looks like. As you can see, it is a parabolic‑shaped surface (because of squaring the error). So our objective is reaching the minimum (the bottom) of the function; the point where the cost is lowest, because the value of J represents the total error of our model. The lower J is, the closer our predictions are to the actual prices. Therefore, by finding the parameters θ₀,θ₁ that minimise J, we obtain the most accurate linear regression line for our dataset.
 
-![Graph of the bowl J](graphe_JFunction)
+![Graph of the bowl J](media/graphe_JFunction)
 
 ### Gradient descent is a ball rolling down the bowl; each step improves the line
 Left and right panels are two views of the same process. Each step down the bowl (left)
@@ -133,7 +133,7 @@ When the ball stops at the bottom, the gradient is zero, the line no longer move
 and you have found the unique θ₁ that minimises total squared error across all data points.
 The bottom of the bowl IS the trained model. Not a step toward it — it IS it.
 
-![Graph of the bowl J](parabolaToRegressionLine)
+![Graph of the bowl J](mediaparabolaToRegressionLine)
 
 
 ### ❓ Confusion: "How can we compute J if we don't have the real hθ?"
@@ -161,15 +161,15 @@ If we did not square the error (e.g., used absolute value or no exponent), the f
 So: squaring → bowl shape → easy to find the minimum with calculus.
 
 ### ❓ Confusion: "Why we chose the squared² error, not the ABSOLUT VALUE |e²|?"
-![trained model plot](AVvsSE.png)
+![trained model plot](media/AVvsSE.png)
 
 ---
 
 ## 3. How to Slope `θ₀,θ₁` to The minimum (Using Derivatives)
 
-![trained model plot](sloppingThetas2.gif)
+![trained model plot](media/sloppingThetas2.gif)
 
-![trained model plot](sloppingCircles.png)
+![trained model plot](media/sloppingCircles.png)
 
 Think of `J(θ₀, θ₁)` as a landscape — a bowl-shaped surface. To navigate downhill, we need to know the **slope of the surface** in each direction. That's what derivatives give us.
 
@@ -385,7 +385,7 @@ flowchart TD
 
 your "learning rate too large / just right / too small" section is currently just three colored text boxes with no visual. Here's what those three cases actually look like as paths down the bowl
 
-![trained model plot](learningRate.png)
+![trained model plot](media/learningRate.png)
 
 
 ### ❓ The key insight that clears the blur
