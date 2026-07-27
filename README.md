@@ -582,31 +582,33 @@ $$\theta_0 := \theta_0 - \alpha \cdot \frac{\partial J}{\partial \theta_0} \qqua
 
 ---
 
-## Academic Integrity
 
-Some provisioning and automation scripts have been intentionally omitted
-from the public repository to discourage direct reuse of the project by
-students currently completing the 42 curriculum.
+### Academic Integrity
 
-The repository still contains the architecture, configuration, manifests,
-documentation, and deployment design.
+To preserve the academic integrity of the 42 curriculum, the core training
+implementation has been intentionally omitted from the public repository.
 
-The complete implementation can be demonstrated during technical interviews.
+The repository still includes the complete mathematical documentation,
+project architecture, visualizations, evaluation utilities, and inference
+pipeline, providing a comprehensive overview of the project and its design.
 
-## Project Structure
+The full implementation is available for technical interviews and portfolio
+reviews upon request.
+
+
+### Project Structure
 
 ```
 .
-├── mandatory/                   # 
-│   ├── data.csv
-│   ├── predict.py
-│   ├── theta.json
-│   └── train.py
+├── mandatory/
+│   ├── data.csv                 # Sample training dataset
+│   ├── predict.py               # Predicts prices using trained parameters
+│   ├── theta.json               # Saved model parameters
+│   └── train.py                 # Core training algorithm (omitted)
 │
-└── bonus/                # ...
-    ├── plot.py           
-    ├── precision.py      
-
+└── bonus/
+    ├── plot.py                  # Gradient Descent visualizations
+    └── precision.py             # Model evaluation utilities
 ```
 
 ---
