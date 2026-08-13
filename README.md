@@ -13,8 +13,6 @@
 
 ![trained model plot](media/linearRegressionGIF2.gif)
 
-![trained model plot](media/plot.png)
-
 </div>
 
 ---
